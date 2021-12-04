@@ -16,13 +16,12 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+//отдельный класс для Card
 class Card {
     private Paint p = new Paint();
     int color, backColor = Color.DKGRAY;
     boolean isOpen = false;
     private float x, y, width, height;
-
 
     public Card(float x, float y, float width, float height, int color) {
         this.color = color;
@@ -31,7 +30,6 @@ class Card {
         this.width = width;
         this.height = height;
     }
-
 
     public boolean flip(float touchX, float touchY) {
         if (touchX >= x && touchX <= x + width && touchY >= y && touchY <= y + height) {
@@ -68,6 +66,7 @@ public class TilesView extends View {
 
     public TilesView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        //удалить
         // 1) заполнить массив tiles случайными цветами
         /*
         cards[0] = new Card(0, 0, 200, 300, Color.YELLOW);
@@ -189,6 +188,7 @@ public class TilesView extends View {
 
         @Override
         protected Void doInBackground(Integer... integers) {
+            //убрать логи
             Log.d("tag", "pause started");
             try {
                 Thread.sleep(integers[0] * 1000);
