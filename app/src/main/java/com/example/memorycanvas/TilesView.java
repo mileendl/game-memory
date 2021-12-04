@@ -1,6 +1,5 @@
 package com.example.memorycanvas;
 
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,41 +10,10 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.Collections;
-//отдельный класс для Card
-class Card {
-    private Paint p = new Paint();
-    int color, backColor = Color.DKGRAY;
-    boolean isOpen = false;
-    private float x, y, width, height;
 
-    public Card(float x, float y, float width, float height, int color) {
-        this.color = color;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-    }
-
-    public boolean flip(float touchX, float touchY) {
-        if (touchX >= x && touchX <= x + width && touchY >= y && touchY <= y + height) {
-            isOpen = !isOpen;
-            return true;
-        } else return false;
-    }
-
-    public void draw(Canvas c) {
-        //рисуем карту в виде цветного прямоугольника
-        if (isOpen) {
-            p.setColor(color);
-        } else p.setColor(backColor);
-        c.drawRect(x, y, x + width, y + height, p);
-    }
-}
 
 public class TilesView extends View {
     int openedCard = 0;
@@ -57,30 +25,15 @@ public class TilesView extends View {
     int widthCard = 200;
     int heightCard = 300;
     int distance = 55;
-
     int width, height; // ширина и высота канвы
 
     public TilesView(Context context) {
         super(context);
     }
-
     public TilesView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        //удалить
         // 1) заполнить массив tiles случайными цветами
-        /*
-        cards[0] = new Card(0, 0, 200, 300, Color.YELLOW);
-        cards[1] = new Card(200 + 50, 0, 200 + 50, 300, Color.YELLOW);
-        cards[2] = new Card(500 + 50, 0, 200 + 50, 300, Color.GREEN);
-        cards[3] = new Card(800 + 50, 0, 200 + 50, 300, Color.GREEN);
-        cards[4] = new Card(0, 300 + 50, 200, 300, Color.RED);
-        cards[5] = new Card(200 + 50, 300 + 50, 200 + 50, 300, Color.RED);
-        cards[6] = new Card(500 + 50, 300 + 50, 200 + 50, 300, Color.BLUE);
-        cards[7] = new Card(800 + 50, 300 + 50, 200 + 50, 300, Color.BLUE);
-        listCards = (new ArrayList<Card>(Arrays.asList(cards)));
-         */
-
-        for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 listCards.add(new Card((widthCard * j + distance * j) + distance, heightCard * i + distance * i, widthCard, heightCard, Color.LTGRAY));
                 Collections.shuffle(listCards);
@@ -156,13 +109,10 @@ public class TilesView extends View {
             if (listCards.size() == 0) {
                 Toast.makeText(getContext(), "Карты на столе закончились! Вы нашли все пары", Toast.LENGTH_SHORT).show();
             }
-
         }
         // 5) определить, какой из плиток коснулись
         // изменить её цвет на противоположный
         // 6) проверить, не выиграли ли вы (все плитки одного цвета)
-
-        //invalidate(); // заставляет экран перерисоваться
         return true;
     }
 
